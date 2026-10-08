@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-reader="on" data-model="https://huggingface.co/RyzenZHU/sitr-b18-onnx/resolve/main/sitr_b18.onnx">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Same touch, any sensor</title>
+<link rel="icon" href="assets/img/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="dist/deck.css">
+</head>
+<body>
+<div id="stage">
+<canvas id="scene" aria-hidden="true"></canvas>
+<svg id="hud" viewBox="0 0 1920 1080" aria-hidden="true"></svg>
+
+<main id="slides" data-slot="6">
+
+<!-- Notes use [Step N] markers: one page per step in the presenter window,
+     and the captions of reader mode. Action cues stand in parentheses. -->
+
+<section class="slide" id="title" data-shots="hero" data-chrome="off" data-title="Title" data-duration="20">
+  <p class="block eyebrow r" style="left:120px; top:190px">An interactive simulation</p>
+  <h1 class="block display r" data-delay="0.7" style="left:112px; top:262px; font-size:132px">Same touch,<br><span class="grad">any sensor</span>.</h1>
+  <p class="block lead r" data-delay="0.7" style="left:120px; top:590px; width:800px; color:var(--ink)">Press an object into four optical tactile sensors, or one you make up, and watch one model read them all.</p>
+  <p class="block body r" data-delay="0.7" style="left:120px; top:770px; width:800px">Built on <b>SITR</b> · Gupta, Mo, Jin, Yuan · ICLR 2025</p>
+  <p class="block fine r" data-delay="0.7" style="left:120px; top:830px; width:800px">An independent demonstration. Not made by SITR’s authors.</p>
+  <aside class="notes">This page lets you press objects into optical tactile sensors, four simulated after real designs or one you make up, and watch one model recover the shape from each. The model is SITR, by Gupta, Mo, Jin and Yuan; the simulation around it is ours.</aside>
+</section>
+
+<section class="slide" id="hook" data-shots="hookOne hookSwap hookReal" data-title="Same touch, different pictures" data-step-durations="14 16 16" data-leave="0.9">
+  <p class="block eyebrow r" style="left:120px; top:112px">The problem</p>
+  <h2 class="block h1" data-step="0" data-until="0" style="left:120px; top:168px; width:700px">One press, one picture.</h2>
+  <h2 class="block h1" data-step="1" data-until="1" style="left:120px; top:168px; width:700px">Another sensor, another picture.</h2>
+  <h2 class="block h1" data-step="2" data-until="2" style="left:120px; top:168px; width:640px">Real sensors do the same.</h2>
+  <dl class="block readouts" data-step="0" data-until="1" style="left:120px; top:410px">
+    <div><dt>Simulated sensor</dt><dd data-readout="sensor">—</dd></div>
+  </dl>
+  <p class="block credit" data-step="0" data-until="1" style="left:120px; top:530px; width:560px">Each fitted sensor is simulated on its real background picture · SITR dataset</p>
+  <figure class="block real borrowed" data-step="2" data-delay="0.7" style="left:867px; top:560px; width:222px; height:222px">
+    <img src="assets/img/real/screw-mini.png" alt=""><figcaption>Real · Mini</figcaption>
+  </figure>
+  <figure class="block real borrowed" data-step="2" data-delay="0.7" style="left:1103px; top:560px; width:222px; height:222px">
+    <img src="assets/img/real/screw-digit.png" alt=""><figcaption>Real · DIGIT</figcaption>
+  </figure>
+  <figure class="block real borrowed" data-step="2" data-delay="0.7" style="left:1339px; top:560px; width:222px; height:222px">
+    <img src="assets/img/real/screw-hex.png" alt=""><figcaption>Real · Hex</figcaption>
+  </figure>
+  <figure class="block real borrowed" data-step="2" data-delay="0.7" style="left:1575px; top:560px; width:222px; height:222px">
+    <img src="assets/img/real/screw-wedge.png" alt=""><figcaption>Real · Wedge</figcaption>
+  </figure>
+  <p class="block credit" data-step="2" data-delay="0.7" style="left:867px; top:862px">One real screw on each of the four real sensors · images: SITR dataset</p>
+  <aside class="notes">An optical tactile sensor turns a touch into a picture. Here a screw is pressed into a simulated GelSight Mini, and this is what its camera sees. [Step 2] Press the same screw into another sensor, and the picture is a different one: other colours, other contrast. [Step 3] Real sensors do the same. The top row is our one press on four simulated sensors; under it, one real screw on the four real ones. A model trained on one sensor often fails on the next.</aside>
+</section>
+
+<section class="slide" id="paint" data-shots="paintGel paintLights paintCamera paintPress" data-title="How a sensor paints a touch" data-step-durations="16 18 16 25">
+  <nav class="block tabs r" data-tabs="Gel · Lights · Camera · Press" style="left:120px; top:28px"></nav>
+  <p class="block eyebrow r" style="left:120px; top:92px">How a sensor paints a touch</p>
+  <h2 class="block h1" data-step="0" data-until="0" style="left:120px; top:150px; width:620px">The gel takes the shape.</h2>
+  <h2 class="block h1" data-step="1" data-until="1" style="left:120px; top:150px; width:620px">Each slope catches a different light.</h2>
+  <h2 class="block h1" data-step="2" data-until="2" style="left:120px; top:150px; width:560px">The camera sees slope as colour.</h2>
+  <h2 class="block h1" data-step="3" data-until="3" style="left:120px; top:150px; width:560px">Press deeper. Slide it.</h2>
+  <p class="block body" data-step="0" data-until="0" style="left:120px; top:440px; width:420px">A soft gel under a thin reflective membrane. Whatever is pressed in leaves a dent.</p>
+  <p class="block fine" data-step="0" data-until="0" style="left:1400px; top:730px; width:420px">Height drawn × 2.</p>
+  <div class="callout left" data-step="0" data-until="0" data-anchor="membrane" data-side="left" data-x="735"><b>Membrane</b><span>thin, reflective</span></div>
+  <div class="callout left" data-step="0" data-until="0" data-anchor="gel" data-side="left" data-x="735"><b>Gel</b><span>soft, clear</span></div>
+  <div class="block" data-step="1" data-until="2" style="left:120px; top:520px">
+    <svg data-widget="slopes" style="display:block"></svg>
+  </div>
+  <div class="callout" data-step="1" data-until="1" data-anchor="light" data-side="right" data-x="1660"><b>Lights</b><span>low, around the gel</span></div>
+  <figure class="block real borrowed" data-step="2" data-until="2" style="left:1500px; top:528px; width:280px; height:280px">
+    <img src="assets/img/real/ball-mini.png" alt=""><figcaption>Real · ball on a Mini</figcaption>
+    <p class="credit">Image: SITR dataset</p>
+  </figure>
+  <dl class="block readouts" data-step="3" style="left:120px; top:470px">
+    <div><dt>Press depth</dt><dd data-readout="depth">—</dd></div>
+  </dl>
+  <aside class="notes">How does a touch become a picture? The sensor's skin is a soft gel under a thin reflective membrane. An object pressed into it leaves its shape as a dent. [Step 2] Around the gel stand coloured lights, low and to the sides. Seen from below, through the gel, each slope of the dent catches the light it faces: one side turns red, another green, another blue. [Step 3] A camera under the gel takes that picture. Colour now stands for slope, and the slopes together are the shape. Beside the simulated picture is a real ball on a real sensor. [Step 4] It is yours to try. (Move the pointer over the pad to slide the ball, and scroll to press it in.)</aside>
+</section>
+
+<section class="slide" id="differ" data-shots="differLights differGel differCamera" data-title="Every sensor paints differently" data-step-durations="18 14 14">
+  <nav class="block tabs r" data-tabs="Lights · Gel · Camera" style="left:120px; top:28px"></nav>
+  <p class="block eyebrow r" style="left:120px; top:92px">Every sensor paints differently</p>
+  <h2 class="block h1" data-step="0" data-until="0" style="left:120px; top:150px; width:600px">Higher lights paint a flatter picture.</h2>
+  <h2 class="block h1" data-step="1" data-until="1" style="left:120px; top:150px; width:600px">Another gel, softer edges.</h2>
+  <h2 class="block h1" data-step="2" data-until="2" style="left:120px; top:150px; width:600px">A wider view shrinks the touch.</h2>
+  <dl class="block readouts" data-step="0" data-until="0" style="left:120px; top:480px">
+    <div><dt>Simulated · lights’ angle</dt><dd data-readout="lights">—</dd></div>
+  </dl>
+  <dl class="block readouts" data-step="1" data-until="1" style="left:120px; top:480px">
+    <div><dt>Simulated · gel’s skirt</dt><dd data-readout="skirt">—</dd></div>
+  </dl>
+  <dl class="block readouts" data-step="2" data-until="2" style="left:120px; top:480px">
+    <div><dt>Simulated · width in view</dt><dd data-readout="field">—</dd></div>
+  </dl>
+  <div class="block blanks" data-step="0" data-until="0" style="left:120px; top:610px">
+    <figure class="real borrowed"><img src="assets/img/real/blank-mini.png" alt=""><figcaption>Mini</figcaption></figure>
+    <figure class="real borrowed"><img src="assets/img/real/blank-digit.png" alt=""><figcaption>DIGIT</figcaption></figure>
+    <figure class="real borrowed"><img src="assets/img/real/blank-hex.png" alt=""><figcaption>Hex</figcaption></figure>
+    <figure class="real borrowed"><img src="assets/img/real/blank-wedge.png" alt=""><figcaption>Wedge</figcaption></figure>
+  </div>
+  <p class="block credit" data-step="0" data-until="0" style="left:120px; top:826px">Real · four sensors, nothing pressed · images: SITR dataset</p>
+  <aside class="notes">Sensors disagree because each is built differently. Left: the sensor as fitted. Right: the same press with the lights raised, which paints the dent flatter. (Scroll to move the lights.) Below, four real sensors with nothing pressed already look nothing alike. [Step 2] Change the gel. In this simulation a softer one wraps the object in a wider skirt, and its edges soften. (Scroll to change the gel.) [Step 3] Change the camera. With a wider view, the same touch takes up less of the picture. (Scroll to change the view.)</aside>
+</section>
+
+<section class="slide" id="calibrate" data-shots="calBall calCorner" data-title="Eighteen presses describe a sensor" data-step-durations="18 18">
+  <p class="block eyebrow r" style="left:120px; top:112px">Telling the model which sensor</p>
+  <h2 class="block h1" data-step="0" data-until="0" style="left:120px; top:168px; width:560px">A ball pressed at nine places.</h2>
+  <h2 class="block h1" data-step="1" data-until="1" style="left:120px; top:168px; width:560px">Then the corner of a cube.</h2>
+  <p class="block body" data-step="0" data-until="0" style="left:120px; top:420px; width:420px">The ball’s shape is known. Each picture shows how this sensor paints known slopes, there.</p>
+  <div class="block stat" data-step="1" style="left:120px; top:400px">
+    <span class="value">18</span>
+    <span class="label">calibration images</span>
+    <p class="cond" style="margin-top:8px; width:330px">4 mm ball · cube corner<br>3 × 3 grid each (SITR)</p>
+  </div>
+  <figure class="block real borrowed" data-step="1" style="left:1190px; top:560px; width:600px; height:257px">
+    <img src="assets/img/real/calibration-mini.png" alt=""><figcaption>Real · a GelSight Mini’s set</figcaption>
+    <p class="credit">Images: SITR dataset</p>
+  </figure>
+  <aside class="notes">So how can one model read them all? SITR asks each sensor to introduce itself. A ball of known size is pressed at nine places across the pad. Since the ball's shape is known, each picture shows how this sensor paints known slopes, there. [Step 2] Then the corner of a cube, nine times, which shows how the gel behaves at an edge. With the empty background, these eighteen pictures are everything the model itself is told about a sensor. Above, they are simulated; below is a real set.</aside>
+</section>
+
+<section class="slide" id="model" data-shots="modelIn modelOut modelSwap" data-title="One model reads them all" data-step-durations="18 16 20">
+  <p class="block eyebrow r" style="left:120px; top:112px">The model</p>
+  <h2 class="block h1" data-step="0" data-until="0" style="left:120px; top:168px; width:520px">One model reads them all.</h2>
+  <h2 class="block h1" data-step="1" data-until="1" style="left:120px; top:168px; width:520px">Out comes the shape.</h2>
+  <h2 class="block h1" data-step="2" data-until="2" style="left:120px; top:168px; width:560px">Swap the sensor. The shape <span class="grad">stays</span>.</h2>
+  <p class="block body" data-step="0" data-until="0" style="left:120px; top:420px; width:460px"><b>SITR</b>: a transformer that takes the picture and the calibration set together.</p>
+  <p class="block cond" data-step="0" data-until="0" style="left:120px; top:560px; width:460px">trained on simulated sensors only · 100 sensor configurations (SITR paper)</p>
+  <p class="block body" data-step="1" data-until="1" style="left:120px; top:420px; width:460px">SITR gives a map of slopes. This page scales it and adds it up into a shape.</p>
+  <!-- Picture and calibration set into the model; the shape out of it. -->
+  <svg class="block flow r" viewBox="0 0 206 320" style="left:1280px; top:310px; width:206px; height:320px" aria-hidden="true">
+    <path d="M0 15 C 36 15, 30 112, 66 112" />
+    <path d="M0 308 C 36 308, 30 148, 66 148" />
+    <rect x="66" y="80" width="134" height="100" rx="18" />
+    <text x="133" y="142" text-anchor="middle">SITR</text>
+  </svg>
+  <svg class="block flow" data-step="1" viewBox="0 0 50 150" style="left:1502px; top:290px; width:50px; height:150px" aria-hidden="true">
+    <path d="M0 150 C 28 150, 20 12, 46 12" />
+    <path d="M36 4 L48 12 L36 20" />
+  </svg>
+  <p class="block small r" style="left:120px; top:790px; width:560px"><span data-readout="model">—</span></p>
+  <p class="block fine r" style="left:120px; top:838px; width:560px">Simulated picture, real model. Heights drawn × 2.</p>
+  <aside class="notes">The picture and the calibration set go into one model together: SITR, a transformer that was trained only on simulated sensors. What runs here is that model itself, with its released weights, in your browser, on our simulated picture. [Step 2] Out comes a map of slopes; added up, it is the shape of the touch. Below it is the true shape, which only the simulation knows. [Step 3] In this simulation, swap the sensor. The picture changes completely. The recovered shape stays.</aside>
+</section>
+
+<section class="slide" id="sandbox" data-shots="sandbox" data-title="Try it" data-duration="60">
+  <p class="block eyebrow r" style="left:120px; top:92px">Try it</p>
+  <div class="block controls r" id="sandbox-controls" style="left:120px; top:150px; width:620px">
+    <h3>Sensor</h3>
+    <div class="picks" data-pick="sensor"></div>
+    <label><span>Lights</span><input type="range" data-slide="tEl" min="-6" max="30" step="1"><output data-out="tEl"></output></label>
+    <label><span>Gel</span><input type="range" data-slide="tSoft" min="0.1" max="1.6" step="0.05"><output data-out="tSoft"></output></label>
+    <label><span>View</span><input type="range" data-slide="tFov" min="10" max="22" step="0.5"><output data-out="tFov"></output></label>
+    <h3>Object</h3>
+    <div class="picks" data-pick="object"></div>
+    <div class="picks"><button type="button" class="go" data-random>Random object</button><span class="seed" data-seed></span><button type="button" data-reset>Reset sliders</button></div>
+  </div>
+  <p class="block small r" style="left:1170px; top:842px; width:650px"><span data-readout="model">—</span></p>
+  <p class="block fine r" style="left:1170px; top:892px; width:660px">Simulated picture · real model · heights × 2</p>
+  <aside class="notes">Try it yourself: pick a sensor or bend one with the sliders; pick an object, or press Random. (Move over the pad to slide the object, and scroll to press.) Steep walls come out lower than they are.</aside>
+</section>
+
+<section class="slide" id="credits" data-shots="credits" data-chrome="off" data-title="Credits" data-duration="0">
+  <h2 class="block h1 r" data-delay="0.8" style="left:120px; top:170px; width:900px">What is real, what is simulated.</h2>
+  <ul class="block steps-list r" data-delay="0.8" style="left:120px; top:390px; width:960px">
+    <li><b>Real</b>The model: SITR’s released weights</li>
+    <li><b>Fitted</b>Four sensors: to real calibration images</li>
+    <li><b>Simulated</b>Every press, in your browser</li>
+  </ul>
+  <p class="block body r" data-delay="0.8" style="left:120px; top:760px; width:900px">Gupta, Mo, Jin, Yuan · <b>Sensor-Invariant Tactile Representation</b> · ICLR 2025 · arXiv 2502.19638</p>
+  <p class="block fine r" data-delay="0.8" style="left:120px; top:862px; width:900px">Model, real pictures and calibration protocol: the SITR release. This page is an independent demonstration and was not made by SITR’s authors.</p>
+  <aside class="notes">The model is real: SITR's released weights. The four sensors are fitted to their real calibration images. Every press is simulated, in your browser. The paper: “Sensor-Invariant Tactile Representation”, Gupta, Mo, Jin, Yuan.</aside>
+</section>
+
+</main>
+
+<div class="block chip" id="hint" style="opacity:0"><span></span></div>
+<div id="caption" aria-live="polite"><p></p></div>
+<div id="start"><p>Click to start · → next · ← back · F full screen<br><small>Starting loads the model in the background: 389 MB, once</small></p></div>
+
+<footer class="chrome" id="chrome">
+  <div class="logos"></div>
+  <span>Same touch, any sensor · built on SITR · not by its authors</span>
+  <span class="num" id="counter">01 / 08</span>
+  <div class="progress"><span id="progress"></span></div>
+</footer>
+<div id="blackout"></div>
+</div>
+<script src="dist/deck.js"></script>
+</body>
+</html>
