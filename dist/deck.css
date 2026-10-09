@@ -1517,6 +1517,17 @@ body.waiting #start {
 
 /* This talk's own components. */
 
+/* MoiréSkin's colour: the mark on its button and the tone of what its own
+   model answers (the accent is SITR's). One value per theme, as in style.css. */
+:root,
+:root[data-theme="dark"] {
+  --skin: #b9a2ff;
+}
+
+:root[data-theme="light"] {
+  --skin: #6a3fc4;
+}
+
 /* The sandbox's controls: the visitor's own sensor and object. Buttons are
    capsules with a neutral outline; the chosen one takes our colour. */
 .controls {
@@ -1554,6 +1565,37 @@ body.waiting #start {
   background: var(--line);
 }
 
+/* A sensor of another kind (MoiréSkin: our own, read by its own model): a dot
+   in its colour on the button, and a few words beside it that take no room
+   in the row. */
+
+/* MoiréSkin's two entries start a row of their own (the flex gap counts
+   once: the spacer takes the other back), which begins with the sensor's
+   name and its dot. */
+.controls .own-row {
+  flex-basis: 100%;
+  height: 0;
+  margin-bottom: -10px;
+}
+
+.controls .own-label {
+  margin-right: 4px;
+  color: var(--ink);
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.controls .own-label::before {
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  margin: 0 10px 2px 0;
+  border-radius: 50%;
+  background: var(--skin);
+  content: "";
+  vertical-align: middle;
+}
+
 .controls button.go {
   border-color: var(--second);
   background: var(--second-soft);
@@ -1574,6 +1616,26 @@ body.waiting #start {
   height: 28px;
   accent-color: var(--ink);
   cursor: pointer;
+}
+
+/* A slider that does not apply to the chosen sensor: its track is dimmed, not
+   hidden; its name stays readable (the fine-print ink) and its read-out,
+   which says why, stays at full strength. */
+.controls label.off > span {
+  color: var(--ink-3);
+}
+
+.controls label.off > input {
+  opacity: 0.5;
+}
+
+.controls label.off > input {
+  cursor: not-allowed;
+}
+
+.controls button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
 }
 
 .controls output {
@@ -1625,6 +1687,12 @@ body.waiting #start {
   stroke-width: 2.5;
 }
 
+/* MoiréSkin's own model: the same box in MoiréSkin's colour. */
+.flow.own rect {
+  fill: color-mix(in srgb, var(--skin) 14%, transparent);
+  stroke: var(--skin);
+}
+
 .flow text {
   fill: var(--ink);
   font-size: 34px;
@@ -1632,9 +1700,15 @@ body.waiting #start {
   letter-spacing: 0.02em;
 }
 
+/* (Two lines in the box: at the floor of what is read, 24 px, and set tight.) */
+.flow.own text {
+  font-size: 24px;
+  letter-spacing: 0;
+}
+
 /* Three words that sort what is on the page, wider than a number. */
 #credits .steps-list li b {
   display: inline-block;
-  min-width: 190px;
+  min-width: 204px;
   color: var(--ink);
 }

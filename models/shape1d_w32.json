@@ -1,0 +1,66 @@
+{
+  "artifact": "shape1d_w32.onnx",
+  "artifact_sha256": "ee02c429d80469355f4f25ecbf741a51723a2092d27fe05a4326394682626295",
+  "attention": true,
+  "blocks": 2,
+  "bytes": 70467050,
+  "checkpoint_epoch": 13,
+  "checkpoint_validation_score": 1.8866376879677773,
+  "frame_pressures_kpa": null,
+  "input": {
+    "images": [
+      1,
+      3,
+      384,
+      384
+    ]
+  },
+  "onnxruntime_max_abs_difference": 0.0006010532379150391,
+  "opset": 17,
+  "output": {
+    "maps": [
+      1,
+      4,
+      192,
+      192
+    ]
+  },
+  "output_channels": [
+    "membrane_mm",
+    "contact_logit",
+    "object_mm",
+    "target_logit"
+  ],
+  "pressure_plane_scale_kpa": null,
+  "sensor": {
+    "ambient_intensity": 0.06,
+    "bending_stiffness_n_mm": 0.0001,
+    "bottom_layer_motion_scale": 0.5,
+    "brightness_gain": 1.02,
+    "brightness_offset": 0.005,
+    "camera_psf_sigma_px": 0.45,
+    "camera_supersample": 2,
+    "cavity_depth_mm": 8.0,
+    "envelope_contrast": 0.22,
+    "grating_angle_a_deg": 18.0,
+    "grating_angle_b_deg": 25.06,
+    "grating_line_transmittance": 0.1,
+    "grating_open_fraction": 0.82,
+    "grating_pitch_mm": 0.33,
+    "moire_phase_offset_rad": -1.2762720155208536,
+    "noise_std": 0.004,
+    "outside_intensity": 0.0,
+    "pattern": "parallel",
+    "physics_size": 192,
+    "pressure_kpa": 4.0,
+    "radial_distortion_k1": 0.12,
+    "sealed_air_coupling": true,
+    "sensor_id": "moireskin-parallel-v1",
+    "sensor_radius_mm": 15.0,
+    "slope_to_shift_mm": 0.12,
+    "tension_n_per_mm": 0.08,
+    "tension_stiffening_per_kpa": 0.04,
+    "top_layer_motion_scale": 1.0
+  },
+  "width": 32
+}

@@ -23,7 +23,7 @@
   <h1 class="block display r" data-delay="0.7" style="left:112px; top:262px; font-size:132px">Same touch,<br><span class="grad">any sensor</span>.</h1>
   <p class="block lead r" data-delay="0.7" style="left:120px; top:590px; width:800px; color:var(--ink)">Press an object into four optical tactile sensors, or one you make up, and watch one model read them all.</p>
   <p class="block body r" data-delay="0.7" style="left:120px; top:770px; width:800px">Built on <b>SITR</b> · Gupta, Mo, Jin, Yuan · ICLR 2025</p>
-  <p class="block fine r" data-delay="0.7" style="left:120px; top:830px; width:800px">An independent demonstration. Not made by SITR’s authors.</p>
+  <p class="block fine r" data-delay="0.7" style="left:120px; top:830px; width:800px">An independent demonstration. Not made by SITR’s authors.<br>And one sensor of our own: MoiréSkin.</p>
   <aside class="notes">This page lets you press objects into optical tactile sensors, four simulated after real designs or one you make up, and watch one model recover the shape from each. The model is SITR, by Gupta, Mo, Jin and Yuan; the simulation around it is ours.</aside>
 </section>
 
@@ -143,6 +143,44 @@
   <aside class="notes">The picture and the calibration set go into one model together: SITR, a transformer that was trained only on simulated sensors. What runs here is that model itself, with its released weights, in your browser, on our simulated picture. [Step 2] Out comes a map of slopes; added up, it is the shape of the touch. Below it is the true shape, which only the simulation knows. [Step 3] In this simulation, swap the sensor. The picture changes completely. The recovered shape stays.</aside>
 </section>
 
+<section class="slide" id="skin" data-shots="skinSee skinSitr skinOwn skinAir" data-title="A sensor of another kind" data-step-durations="20 27 19 24">
+  <p class="block eyebrow r" style="left:120px; top:112px">Our own sensor</p>
+  <h2 class="block h1" data-step="0" data-until="0" style="left:120px; top:168px; width:700px">Ours sees through its skin.</h2>
+  <h2 class="block h1" data-step="1" data-until="1" style="left:120px; top:168px; width:520px">SITR cannot read it.</h2>
+  <h2 class="block h1" data-step="2" data-until="2" style="left:120px; top:168px; width:520px">Its own model reads it.</h2>
+  <h2 class="block h1" data-step="3" style="left:120px; top:168px; width:600px">More air wraps the membrane closer.</h2>
+  <p class="block body" data-step="0" data-until="0" style="left:120px; top:420px; width:520px"><b>MoiréSkin</b>: no side lights, no gel. A press shifts two line gratings, and the camera sees the lines move.</p>
+  <p class="block body" data-step="1" data-until="1" style="left:120px; top:420px; width:460px">SITR reads shading, and here there is none. Given MoiréSkin’s own eighteen presses, its answer holds almost none of the shape.</p>
+  <p class="block cond" data-step="1" data-until="1" style="left:120px; top:654px; width:460px">made for sensors that shade · it has never seen one like this</p>
+  <p class="block body" data-step="2" data-until="2" style="left:120px; top:420px; width:460px">The same press, read by the model made for this one sensor.</p>
+  <p class="block cond" data-step="2" data-until="2" style="left:120px; top:530px; width:460px">trained on presses from this same simulation · on nothing real</p>
+  <p class="block body" data-step="3" style="left:120px; top:420px; width:480px">Air holds the membrane. More air wraps it further round the object, and the model reads more of the shape.</p>
+  <p class="block cond" data-step="3" style="left:120px; top:640px; width:480px">the simulation’s pressures · not the real sensor’s</p>
+  <!-- As on the model slide: picture and calibration set into SITR, the shape out of it
+       (the arrow out is part of each drawing: the shape windows stand 30 px nearer here). -->
+  <svg class="block flow" data-step="1" data-until="1" data-delay="0.9" viewBox="0 -20 250 340" style="left:1280px; top:290px; width:250px; height:340px" aria-hidden="true">
+    <path d="M0 15 C 36 15, 30 112, 66 112" />
+    <path d="M0 308 C 36 308, 30 148, 66 148" />
+    <rect x="66" y="80" width="134" height="100" rx="18" />
+    <text x="133" y="142" text-anchor="middle">SITR</text>
+    <path d="M206 130 C 228 130, 222 -8, 242 -8" />
+    <path d="M233 -16 L244 -8 L233 0" />
+  </svg>
+  <!-- MoiréSkin's own model takes the picture alone. -->
+  <svg class="block flow own" data-step="2" viewBox="0 -20 250 340" style="left:1280px; top:290px; width:250px; height:340px" aria-hidden="true">
+    <path d="M0 15 C 36 15, 30 112, 66 112" />
+    <rect x="66" y="80" width="134" height="100" rx="18" />
+    <text x="133" y="124" text-anchor="middle">MoiréSkin</text>
+    <text x="133" y="153" text-anchor="middle">model</text>
+    <path d="M206 130 C 228 130, 222 -8, 242 -8" />
+    <path d="M233 -16 L244 -8 L233 0" />
+  </svg>
+  <p class="block small" data-step="1" style="left:120px; top:790px; width:560px"><span data-readout="model">—</span></p>
+  <p class="block fine" data-step="1" data-until="1" style="left:120px; top:838px; width:520px">Simulated picture, real model. Shapes: the framed 12 mm, heights × 2.</p>
+  <p class="block fine" data-step="2" style="left:120px; top:838px; width:520px">Simulated picture. Shapes: the framed 12 mm, heights × 2.</p>
+  <aside class="notes">One more sensor, and this one is ours. MoiréSkin sees through its skin: no side lights, no gel. A press shifts two line gratings against each other, and its camera sees the lines move. (Move over the membrane to slide the object, and scroll to press.) [Step 2] SITR reads shading, and here there is none. Given this picture and MoiréSkin’s own eighteen calibration presses, the same ball and cube corner, its answer holds almost none of the shape. It was made for sensors that shade, and has never seen one like this. [Step 3] MoiréSkin has a model of its own, made for this one sensor and trained on presses from this same simulation, on nothing real. It reads the same press. [Step 4] Air holds MoiréSkin’s membrane. (Scroll to change the air pressure.) More air wraps the membrane further round the object, and the model then reads more of the shape. These are the simulation’s pressures, not the real sensor’s.</aside>
+</section>
+
 <section class="slide" id="sandbox" data-shots="sandbox" data-title="Try it" data-duration="60">
   <p class="block eyebrow r" style="left:120px; top:92px">Try it</p>
   <div class="block controls r" id="sandbox-controls" style="left:120px; top:150px; width:620px">
@@ -156,20 +194,21 @@
     <div class="picks"><button type="button" class="go" data-random>Random object</button><span class="seed" data-seed></span><button type="button" data-reset>Reset sliders</button></div>
   </div>
   <p class="block small r" style="left:1170px; top:842px; width:650px"><span data-readout="model">—</span></p>
-  <p class="block fine r" style="left:1170px; top:892px; width:660px">Simulated picture · real model · heights × 2</p>
-  <aside class="notes">Try it yourself: pick a sensor or bend one with the sliders; pick an object, or press Random. (Move over the pad to slide the object, and scroll to press.) Steep walls come out lower than they are.</aside>
+  <p class="block fine r" style="left:1170px; top:892px; width:686px"><span data-readout="note">Simulated picture · real model · heights × 2</span></p>
+  <aside class="notes">Try it yourself: pick a sensor or bend one with the sliders; pick an object, or press Random. (Move over the pad to slide the object, and scroll to press.) Steep walls come out lower than they are. MoiréSkin is our own see-through sensor, read by its own model, not by SITR.</aside>
 </section>
 
 <section class="slide" id="credits" data-shots="credits" data-chrome="off" data-title="Credits" data-duration="0">
   <h2 class="block h1 r" data-delay="0.8" style="left:120px; top:170px; width:900px">What is real, what is simulated.</h2>
-  <ul class="block steps-list r" data-delay="0.8" style="left:120px; top:390px; width:960px">
+  <ul class="block steps-list r" data-delay="0.8" style="left:120px; top:380px; width:1010px">
     <li><b>Real</b>The model: SITR’s released weights</li>
     <li><b>Fitted</b>Four sensors: to real calibration images</li>
     <li><b>Simulated</b>Every press, in your browser</li>
+    <li><b>Our own</b>MoiréSkin and its model: simulation only</li>
   </ul>
-  <p class="block body r" data-delay="0.8" style="left:120px; top:760px; width:900px">Gupta, Mo, Jin, Yuan · <b>Sensor-Invariant Tactile Representation</b> · ICLR 2025 · arXiv 2502.19638</p>
-  <p class="block fine r" data-delay="0.8" style="left:120px; top:862px; width:900px">Model, real pictures and calibration protocol: the SITR release. This page is an independent demonstration and was not made by SITR’s authors.</p>
-  <aside class="notes">The model is real: SITR's released weights. The four sensors are fitted to their real calibration images. Every press is simulated, in your browser. The paper: “Sensor-Invariant Tactile Representation”, Gupta, Mo, Jin, Yuan.</aside>
+  <p class="block body r" data-delay="0.8" style="left:120px; top:700px; width:900px">Gupta, Mo, Jin, Yuan · <b>Sensor-Invariant Tactile Representation</b> · ICLR 2025 · arXiv 2502.19638</p>
+  <p class="block fine r" data-delay="0.8" style="left:120px; top:806px; width:900px">Model, real pictures and calibration protocol: the SITR release. This page is an independent demonstration and was not made by SITR’s authors.</p>
+  <aside class="notes">The model is real: SITR's released weights. The four sensors are fitted to their real calibration images. Every press is simulated, in your browser. MoiréSkin is our own sensor: it is simulated after its calibration, and its model was trained on simulated presses only. The paper: “Sensor-Invariant Tactile Representation”, Gupta, Mo, Jin, Yuan.</aside>
 </section>
 
 </main>
@@ -180,7 +219,7 @@
 
 <footer class="chrome" id="chrome">
   <div class="logos"></div>
-  <span>Same touch, any sensor · built on SITR · not by its authors</span>
+  <span>Same touch, any sensor · built on SITR · not by its authors · MoiréSkin is ours</span>
   <span class="num" id="counter">01 / 08</span>
   <div class="progress"><span id="progress"></span></div>
 </footer>
